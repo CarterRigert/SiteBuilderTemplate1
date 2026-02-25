@@ -2,6 +2,9 @@
   "name": "site-template",
   "version": "1.0.0",
   "private": true,
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
