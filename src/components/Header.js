@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, CircularProgress } from '@mui/material';
+import { Box, Typography, CircularProgress } from '@mui/material';
 import siteConfig from '../siteConfig';
 import heroImage from '../images/hero.jpg';
 
 const Header = () => {
     const [imageLoaded, setImageLoaded] = useState(false);
-
-    const scrollDown = () => {
-        const target = document.getElementById('about') || document.getElementById('services') || document.getElementById('contact');
-        target?.scrollIntoView({ behavior: 'smooth' });
-    };
 
     if (!imageLoaded) {
         return (
@@ -70,22 +65,6 @@ const Header = () => {
                 >
                     {siteConfig.tagline}
                 </Typography>
-                <Button
-                    onClick={scrollDown}
-                    variant="contained"
-                    sx={{
-                        backgroundColor: 'white',
-                        color: siteConfig.primaryColor,
-                        fontSize: 18,
-                        px: 4,
-                        borderRadius: '50px',
-                        '&:hover': { backgroundColor: '#f0f0f0' },
-                        fontFamily: '"Alumni Sans", sans-serif',
-                        boxShadow: 'none',
-                    }}
-                >
-                    Learn More
-                </Button>
             </Box>
         </Box>
     );
