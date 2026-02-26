@@ -17,16 +17,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check if site is configured
+        id: check
+        run: |
+          if grep -q '{{SITE_NAME}}' src/siteConfig.js; then
+            echo "configured=false" >> $GITHUB_OUTPUT
+          else
+            echo "configured=true" >> $GITHUB_OUTPUT
+          fi
+
       - uses: actions/setup-node@v4
+        if: steps.check.outputs.configured == 'true'
         with:
           node-version: 18
           cache: npm
 
       - run: npm ci
+        if: steps.check.outputs.configured == 'true'
 
       - run: npm run build
+        if: steps.check.outputs.configured == 'true'
 
       - uses: peaceiris/actions-gh-pages@v3
+        if: steps.check.outputs.configured == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
