@@ -1,4 +1,4 @@
-const siteConfig = {
+const raw = {
   siteName: "{{SITE_NAME}}",
   tagline: "{{TAGLINE}}",
   aboutText: "{{ABOUT_TEXT}}",
@@ -15,6 +15,13 @@ const siteConfig = {
     instagram: "{{SOCIAL_INSTAGRAM}}",
     facebook: "{{SOCIAL_FACEBOOK}}"
   }
+};
+
+const isPlaceholder = (v) => !v || v.startsWith('{{');
+
+const siteConfig = {
+  ...raw,
+  primaryColor: isPlaceholder(raw.primaryColor) ? '#555555' : raw.primaryColor,
 };
 
 export default siteConfig;
