@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import Home from './Home';
 import Layout from './components/Layout';
@@ -44,4 +44,4 @@ export default function App() {
     );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
