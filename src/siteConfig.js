@@ -3,18 +3,17 @@ const siteConfig = {
   tagline: "{{TAGLINE}}",
   aboutText: "{{ABOUT_TEXT}}",
   primaryColor: "{{PRIMARY_COLOR}}",
+  service1: { title: "{{SERVICE1_TITLE}}", description: "{{SERVICE1_DESCRIPTION}}" },
+  service2: { title: "{{SERVICE2_TITLE}}", description: "{{SERVICE2_DESCRIPTION}}" },
+  service3: { title: "{{SERVICE3_TITLE}}", description: "{{SERVICE3_DESCRIPTION}}" },
   contact: {
     email: "{{CONTACT_EMAIL}}",
     phone: "{{CONTACT_PHONE}}",
     address: "{{CONTACT_ADDRESS}}"
   },
-  page1: {
-    title: "{{PAGE1_TITLE}}",
-    content: "{{PAGE1_CONTENT}}"
-  },
-  page2: {
-    title: "{{PAGE2_TITLE}}",
-    content: "{{PAGE2_CONTENT}}"
+  social: {
+    instagram: "{{SOCIAL_INSTAGRAM}}",
+    facebook: "{{SOCIAL_FACEBOOK}}"
   }
 };
 
