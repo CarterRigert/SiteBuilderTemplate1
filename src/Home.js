@@ -13,6 +13,13 @@ const Home = () => {
     const services = [siteConfig.service1, siteConfig.service2, siteConfig.service3]
         .filter(s => s && isSet(s.title));
 
+    const hasContact =
+        isSet(siteConfig.contact?.email) ||
+        isSet(siteConfig.contact?.phone) ||
+        isSet(siteConfig.contact?.address) ||
+        isSet(siteConfig.social?.instagram) ||
+        isSet(siteConfig.social?.facebook);
+
     return (
         <>
             <Navbar />
@@ -76,9 +83,11 @@ const Home = () => {
                 </Box>
             )}
 
-            <Box id="contact" sx={{ py: 6 }}>
-                <Contact />
-            </Box>
+            {hasContact && (
+                <Box id="contact" sx={{ py: 6 }}>
+                    <Contact />
+                </Box>
+            )}
         </>
     );
 };
