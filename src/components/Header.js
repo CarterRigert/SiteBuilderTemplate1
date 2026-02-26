@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Box, Typography, Button, Stack, CircularProgress } from '@mui/material';
+import { Box, Typography, Button, CircularProgress } from '@mui/material';
 import siteConfig from '../siteConfig';
 import heroImage from '../images/hero.jpg';
 
 const Header = () => {
     const [imageLoaded, setImageLoaded] = useState(false);
+
+    const scrollDown = () => {
+        const target = document.getElementById('about') || document.getElementById('services') || document.getElementById('contact');
+        target?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     if (!imageLoaded) {
         return (
@@ -28,92 +32,60 @@ const Header = () => {
             sx={{
                 position: 'relative',
                 width: '100%',
+                height: { xs: '50vh', sm: '60vh', md: '70vh' },
                 overflow: 'hidden',
-                display: imageLoaded ? 'block' : 'none'
             }}
         >
             <Box
                 component="img"
                 src={heroImage}
                 alt={siteConfig.siteName}
-                onLoad={() => setImageLoaded(true)}
                 sx={{
                     width: '100%',
-                    height: 'auto',
-                    display: 'block'
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                    display: 'block',
                 }}
             />
-
             <Box
                 sx={{
                     position: 'absolute',
-                    top: '70%',
+                    top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     color: 'white',
                     textAlign: 'center',
-                    width: '90%'
+                    width: '90%',
                 }}
             >
                 <Typography
                     variant="h2"
                     component="h1"
                     sx={{
-                        mb: 1,
-                        fontSize: 40,
+                        mb: 3,
+                        fontSize: { xs: 32, sm: 40 },
                         fontFamily: '"Annie Use Your Telescope", cursive',
                     }}
                 >
                     {siteConfig.tagline}
                 </Typography>
-
-                {(siteConfig.page1 || siteConfig.page2) && (
-                    <Stack
-                        direction="column"
-                        spacing={{ xs: 1, sm: 2 }}
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        {siteConfig.page1 && (
-                            <Button
-                                component={Link}
-                                to="/page1"
-                                variant="contained"
-                                sx={{
-                                    backgroundColor: 'white',
-                                    color: siteConfig.primaryColor,
-                                    fontSize: 18,
-                                    width: 120,
-                                    textDecoration: 'none',
-                                    borderRadius: '50px',
-                                    '&:hover': { backgroundColor: '#f0f0f0' },
-                                    fontFamily: 'Alumni Sans',
-                                }}
-                            >
-                                {siteConfig.page1.title}
-                            </Button>
-                        )}
-                        {siteConfig.page2 && (
-                            <Button
-                                component={Link}
-                                to="/page2"
-                                variant="contained"
-                                sx={{
-                                    backgroundColor: 'white',
-                                    color: siteConfig.primaryColor,
-                                    fontSize: 18,
-                                    width: 120,
-                                    textDecoration: 'none',
-                                    borderRadius: '50px',
-                                    '&:hover': { backgroundColor: '#f0f0f0' },
-                                    fontFamily: 'Alumni Sans',
-                                }}
-                            >
-                                {siteConfig.page2.title}
-                            </Button>
-                        )}
-                    </Stack>
-                )}
+                <Button
+                    onClick={scrollDown}
+                    variant="contained"
+                    sx={{
+                        backgroundColor: 'white',
+                        color: siteConfig.primaryColor,
+                        fontSize: 18,
+                        px: 4,
+                        borderRadius: '50px',
+                        '&:hover': { backgroundColor: '#f0f0f0' },
+                        fontFamily: '"Alumni Sans", sans-serif',
+                        boxShadow: 'none',
+                    }}
+                >
+                    Learn More
+                </Button>
             </Box>
         </Box>
     );
