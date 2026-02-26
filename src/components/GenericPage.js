@@ -36,7 +36,8 @@ const GenericPage = ({ title, content, image }) => {
                 sx={{
                     position: 'relative',
                     width: '100%',
-                    overflow: 'hidden'
+                    height: { xs: '35vh', sm: '45vh', md: '55vh' },
+                    overflow: 'hidden',
                 }}
             >
                 <Box
@@ -45,8 +46,10 @@ const GenericPage = ({ title, content, image }) => {
                     alt={title}
                     sx={{
                         width: '100%',
-                        height: 'auto',
-                        display: 'block'
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        display: 'block',
                     }}
                 />
                 <Box

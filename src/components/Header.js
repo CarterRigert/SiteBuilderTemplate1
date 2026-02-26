@@ -28,8 +28,8 @@ const Header = () => {
             sx={{
                 position: 'relative',
                 width: '100%',
+                height: { xs: '50vh', sm: '60vh', md: '70vh' },
                 overflow: 'hidden',
-                display: imageLoaded ? 'block' : 'none'
             }}
         >
             <Box
@@ -39,15 +39,17 @@ const Header = () => {
                 onLoad={() => setImageLoaded(true)}
                 sx={{
                     width: '100%',
-                    height: 'auto',
-                    display: 'block'
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                    display: 'block',
                 }}
             />
 
             <Box
                 sx={{
                     position: 'absolute',
-                    top: '70%',
+                    top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     color: 'white',
@@ -59,8 +61,8 @@ const Header = () => {
                     variant="h2"
                     component="h1"
                     sx={{
-                        mb: 1,
-                        fontSize: 40,
+                        mb: 2,
+                        fontSize: { xs: 32, sm: 40 },
                         fontFamily: '"Annie Use Your Telescope", cursive',
                     }}
                 >
@@ -69,8 +71,8 @@ const Header = () => {
 
                 {(siteConfig.page1 || siteConfig.page2) && (
                     <Stack
-                        direction="column"
-                        spacing={{ xs: 1, sm: 2 }}
+                        direction="row"
+                        spacing={2}
                         justifyContent="center"
                         alignItems="center"
                     >
