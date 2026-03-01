@@ -5,18 +5,21 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages-deploy
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  check:
     runs-on: ubuntu-latest
+    outputs:
+      configured: ${{ steps.check.outputs.configured }}
     steps:
       - uses: actions/checkout@v4
-
       - name: Check if site is configured
         id: check
         run: |
@@ -26,20 +29,31 @@ jobs:
             echo "configured=true" >> $GITHUB_OUTPUT
           fi
 
+  deploy:
+    needs: check
+    if: needs.check.outputs.configured == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
-        if: steps.check.outputs.configured == 'true'
         with:
           node-version: 18
           cache: npm
 
       - run: npm ci
-        if: steps.check.outputs.configured == 'true'
 
       - run: npm run build
-        if: steps.check.outputs.configured == 'true'
 
-      - uses: peaceiris/actions-gh-pages@v3
-        if: steps.check.outputs.configured == 'true'
+      - uses: actions/configure-pages@v4
+
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          path: ./build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
