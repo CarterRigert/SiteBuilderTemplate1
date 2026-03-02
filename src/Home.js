@@ -8,7 +8,12 @@ import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/materi
 const isSet = (val) => val && !val.startsWith('{{');
 
 const Home = () => {
-    useEffect(() => { window.scrollTo(0, 0); }, []);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if (isSet(siteConfig.siteName)) {
+            document.title = siteConfig.siteName;
+        }
+    }, []);
 
     const services = [siteConfig.service1, siteConfig.service2, siteConfig.service3]
         .filter(s => s && isSet(s.title));
